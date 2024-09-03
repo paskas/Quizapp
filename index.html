@@ -16,7 +16,7 @@
     crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="init()">
   <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
       <span class="navbar-brand mb-0 h1">Quizapp</span>
@@ -27,37 +27,35 @@
     <div class="card quiz-card shadow-lg border-off">
       <img src="./img/riddler_question-mark.jpg" class="card-img-top">
       <div class="card-body">
-        <h5 class="card-title m-2">Fragen</h5>
+        <h5 class="card-title m-2" id="question_itle">Fragen</h5>
 
-        <div class="card m-2">
-          <div class="card-body">
+        <div class="card quiz-answer-card m-2" onclick="answer('answer_1')">
+          <div class="card-body" id="answer_1">
             Antwort
           </div>
         </div>
-        <div class="card m-2">
-          <div class="card-body">
+        <div class="card quiz-answer-card m-2" onclick="answer('answer_2')">
+          <div class="card-body" id="answer_2">
             Antwort
           </div>
         </div>
-        <div class="card m-2">
-          <div class="card-body">
+        <div class="card quiz-answer-card m-2" onclick="answer('answer_3')">
+          <div class="card-body" id="answer_3">
             Antwort
           </div>
         </div>
-        <div class="card m-2">
-          <div class="card-body">
+        <div class="card quiz-answer-card m-2" onclick="answer('answer_4')">
+          <div class="card-body" id="answer_4">
             Antwort
           </div>
         </div>
         <hr>
         <div class="questin-footer m-2">
-          <span><b>1</b> von <b>5</b> Fragen</span>
+          <span><b>1</b> von <b id="question_length">Zahl</b> Fragen</span>
           <button type="button" class="btn btn-success">Nächste Frage</button>
         </div>
-
       </div>
     </div>
-
 </body>
 
 </html>

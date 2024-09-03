@@ -23,3 +23,8 @@ body {
 .border-off{
     border: none !important;
 }
+
+.quiz-answer-card:hover{
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.05);
+}
