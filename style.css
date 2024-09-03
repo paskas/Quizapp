@@ -1,4 +1,25 @@
 body {
+    background-color: #037e37 !important;
+}
+
+.container {
     min-height: 100vh;
-    background-color: #007AFF !important;
+    background-color: #037e37 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.questin-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quiz-card{
+    width: 30rem;
+}
+
+.border-off{
+    border: none !important;
 }
