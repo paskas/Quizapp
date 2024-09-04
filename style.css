@@ -10,21 +10,26 @@ body {
     align-items: center;
 }
 
-.questin-footer{
+.questin-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.quiz-card{
+.quiz-card {
     width: 30rem;
 }
 
-.border-off{
+.border-off {
     border: none !important;
 }
 
-.quiz-answer-card:hover{
+.quiz-answer-card:hover {
     cursor: pointer;
-    background-color: rgba(0,0,0,0.05);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.bg-success,
+.bg-danger {
+    color: white;
 }
