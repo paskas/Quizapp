@@ -81,19 +81,30 @@ let questions = [
     }
 ];
 
+
+let rightQuestions = 0;
 let currentQuestion = 0;
+
 
 function init() {
     document.getElementById('question_length').innerHTML = questions.length;
     showQuestion();
 }
 
-function showQuestion() {
 
+function showQuestion() {
     if (currentQuestion >= questions.length) {
         document.getElementById('question_body').classList.add('d-none')
         document.getElementById('end_screen').style = '';
+        document.getElementById('amount_of_questions').innerHTML = questions.length;
+        document.getElementById('amount_of_right_questions').innerHTML = rightQuestions;
     } else {
+        let percent = (currentQuestion + 1) / questions.length;
+        percent = Math.round(percent * 100);
+        document.getElementById('progress_bar_end_screen').innerHTML = `${percent} %`;
+        document.getElementById('progress_bar_end_screen').style = `width:${percent}%;`;
+        document.getElementById('progress_bar_quiz').innerHTML = `${percent} %`;
+        document.getElementById('progress_bar_quiz').style = `width:${percent}%;`;
         let question = questions[currentQuestion];
         document.getElementById('question_itle').innerHTML = question['question'];
         document.getElementById('question_number').innerHTML = currentQuestion + 1;
@@ -101,10 +112,13 @@ function showQuestion() {
     }
 }
 
-function showAnswer() {
 
+function showAnswer() {
     if (currentQuestion >= questions.length) {
-        document.getElementById('end_quiz').classList.add('d-none')
+        document.getElementById('question_body').classList.add('d-none')
+        document.getElementById('end_screen').style = '';
+        document.getElementById('amount_of_questions').innerHTML = questions.length;
+        document.getElementById('amount_of_right_questions').innerHTML = rightQuestions;
     } else {
         let answer = questions[currentQuestion];
         document.getElementById('answer_1').innerHTML = answer['answer_1'];
@@ -114,12 +128,13 @@ function showAnswer() {
     }
 }
 
-/* auskommentieren ! */
+
 function answer(selction) {                                                                 //  welche Anwtort geklickt wird übergibt den wert an answer(selction)
     let question = questions[currentQuestion];                                              //  die Variable beinhaltet die aktuelle Frage
     let selctedQuestionNumber = selction.slice(-1)                                          //  die Variable beinhaltet den übergabe Wert z.B. answer_1 wo mit slice(-1) der letzte Buschstabe aus dem String übergeben wird
     let idOfRightAnswer = `answer_${question['right_answer']}`;
     if (selctedQuestionNumber == question['right_answer']) {                                //  Vergleich ob die angeklickt Antwort mit der right_answer übereinstimmt
+        rightQuestions++;
         document.getElementById(selction).parentNode.classList.add('bg-success');           //  richtige antwort, setzt den übergeordneten container (parent) auf "grün"
     } else {                                                                                //  anonsten mach das !
         document.getElementById(selction).parentNode.classList.add('bg-danger');            //  falsche antwort, setzt den übergeordneten container (parent) auf "rot"
@@ -128,13 +143,15 @@ function answer(selction) {                                                     
     document.getElementById('next_question_btn').disabled = false;                          //  setzt den button auf enable
 }
 
+
 function nextQuestion() {
-    currentQuestion++                                                                       //  wird um 1 erhöht z.B. von 0 auf 1
+    currentQuestion++;                                                                       //  wird um 1 erhöht z.B. von 0 auf 1
     document.getElementById('next_question_btn').disabled = true;                           //  setzt den button auf disable
-    resetAnswerButtons()                                                                    // resettet die Farben der answer div`s 
+    resetAnswerButtons();                                                                    // resettet die Farben der answer div`s 
     showQuestion();                                                                         // zeigt die neue Frage an 
     showAnswer();                                                                           // zeigt die neuen Antworten an 
 }
+
 
 function resetAnswerButtons() {
     document.getElementById('answer_1').parentNode.classList.remove('bg-success');
@@ -145,5 +162,13 @@ function resetAnswerButtons() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+}
+
+function restartGame() {
+    document.getElementById('question_body').classList.remove('d-none')
+    document.getElementById('end_screen').style = 'display: none;';
+    rightQuestions = 0;
+    currentQuestion = 0;
+    init();
 }
 

@@ -34,13 +34,41 @@ body {
     color: white;
 }
 
-.width-100{
+.width-100 {
     width: 100%;
 }
-.text-center{
+
+.text-center {
     text-align: center;
 }
 
-.d-none{
+.d-none {
     display: none;
+}
+
+.final-headline {
+    font-size: 38px;
+    margin: 24px;
+}
+
+.final-text {
+    font-size: 20px;
+}
+
+.progress {
+    margin: 16px 0 16px 0;
+}
+
+.background-green_1 {
+    background-color: #70f01f !important;
+}
+
+.background-green_2 {
+    background-color: #05ba12 !important;
+}
+
+.button-restart{
+    display: flex;
+    justify-content: center;
+    margin: 16px;
 }
