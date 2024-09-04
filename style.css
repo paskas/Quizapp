@@ -1,10 +1,10 @@
 body {
-    background-color: #037e37 !important;
+    background-color: #332d2d !important;
 }
 
 .container {
     min-height: 100vh;
-    background-color: #037e37 !important;
+    background-color: #332d2d !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,14 +60,14 @@ body {
 }
 
 .background-green_1 {
-    background-color: #70f01f !important;
+    background-color: #037e37 !important;
 }
 
 .background-green_2 {
     background-color: #05ba12 !important;
 }
 
-.button-restart{
+.button-restart {
     display: flex;
     justify-content: center;
     margin: 16px;

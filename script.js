@@ -84,6 +84,8 @@ let questions = [
 
 let rightQuestions = 0;
 let currentQuestion = 0;
+let AUDIO_SUCESS = new Audio('audio/correct.mp3');
+let AUDIO_FAIL = new Audio('audio/fail.mp3');
 
 
 function init() {
@@ -93,32 +95,31 @@ function init() {
 
 
 function showQuestion() {
-    if (currentQuestion >= questions.length) {
-        document.getElementById('question_body').classList.add('d-none')
-        document.getElementById('end_screen').style = '';
-        document.getElementById('amount_of_questions').innerHTML = questions.length;
-        document.getElementById('amount_of_right_questions').innerHTML = rightQuestions;
+    if (gameIsOver()) {
+        showEndScreen();
     } else {
-        let percent = (currentQuestion + 1) / questions.length;
-        percent = Math.round(percent * 100);
-        document.getElementById('progress_bar_end_screen').innerHTML = `${percent} %`;
-        document.getElementById('progress_bar_end_screen').style = `width:${percent}%;`;
-        document.getElementById('progress_bar_quiz').innerHTML = `${percent} %`;
-        document.getElementById('progress_bar_quiz').style = `width:${percent}%;`;
-        let question = questions[currentQuestion];
-        document.getElementById('question_itle').innerHTML = question['question'];
-        document.getElementById('question_number').innerHTML = currentQuestion + 1;
+        updateProgressBar();
+        updateToNextQuestions();
         showAnswer();
     }
 }
 
 
+function gameIsOver() {
+    return currentQuestion >= questions.length;
+}
+
+
+function updateToNextQuestions() {
+    let question = questions[currentQuestion];
+    document.getElementById('question_itle').innerHTML = question['question'];
+    document.getElementById('question_number').innerHTML = currentQuestion + 1;
+}
+
+
 function showAnswer() {
     if (currentQuestion >= questions.length) {
-        document.getElementById('question_body').classList.add('d-none')
-        document.getElementById('end_screen').style = '';
-        document.getElementById('amount_of_questions').innerHTML = questions.length;
-        document.getElementById('amount_of_right_questions').innerHTML = rightQuestions;
+        showEndScreen()
     } else {
         let answer = questions[currentQuestion];
         document.getElementById('answer_1').innerHTML = answer['answer_1'];
@@ -129,18 +130,43 @@ function showAnswer() {
 }
 
 
+function updateProgressBar() {
+    let percent = (currentQuestion + 1) / questions.length;
+    percent = Math.round(percent * 100);
+    document.getElementById('progress_bar_end_screen').innerHTML = `${percent} %`;
+    document.getElementById('progress_bar_end_screen').style = `width:${percent}%;`;
+    document.getElementById('progress_bar_quiz').innerHTML = `${percent} %`;
+    document.getElementById('progress_bar_quiz').style = `width:${percent}%;`;
+}
+
+
+function showEndScreen() {
+    document.getElementById('question_body').classList.add('d-none')
+    document.getElementById('end_screen').style = '';
+    document.getElementById('amount_of_questions').innerHTML = questions.length;
+    document.getElementById('amount_of_right_questions').innerHTML = rightQuestions;
+}
+
+
 function answer(selction) {                                                                 //  welche Anwtort geklickt wird übergibt den wert an answer(selction)
     let question = questions[currentQuestion];                                              //  die Variable beinhaltet die aktuelle Frage
     let selctedQuestionNumber = selction.slice(-1)                                          //  die Variable beinhaltet den übergabe Wert z.B. answer_1 wo mit slice(-1) der letzte Buschstabe aus dem String übergeben wird
     let idOfRightAnswer = `answer_${question['right_answer']}`;
-    if (selctedQuestionNumber == question['right_answer']) {                                //  Vergleich ob die angeklickt Antwort mit der right_answer übereinstimmt
-        rightQuestions++;
+    if (rightAnswerSelected(selctedQuestionNumber)) {                                       //  Vergleich ob die angeklickt Antwort mit der right_answer übereinstimmt
         document.getElementById(selction).parentNode.classList.add('bg-success');           //  richtige antwort, setzt den übergeordneten container (parent) auf "grün"
+        AUDIO_SUCESS.play();
+        rightQuestions++;
     } else {                                                                                //  anonsten mach das !
         document.getElementById(selction).parentNode.classList.add('bg-danger');            //  falsche antwort, setzt den übergeordneten container (parent) auf "rot"
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+        AUDIO_FAIL.play();
     }
     document.getElementById('next_question_btn').disabled = false;                          //  setzt den button auf enable
+}
+
+
+function rightAnswerSelected(selctedQuestionNumber) {
+    return selctedQuestionNumber == question['right_answer'];
 }
 
 
@@ -163,6 +189,7 @@ function resetAnswerButtons() {
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
 }
+
 
 function restartGame() {
     document.getElementById('question_body').classList.remove('d-none')
