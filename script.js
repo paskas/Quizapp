@@ -85,13 +85,14 @@ let currentQuestion = 0;
 
 function init() {
     document.getElementById('question_length').innerHTML = questions.length;
-    showQuestion()
+    showQuestion();
 }
 
 function showQuestion() {
 
     if (currentQuestion >= questions.length) {
-        document.getElementById('end_screen').classList.add('d-none')
+        document.getElementById('question_body').classList.add('d-none')
+        document.getElementById('end_screen').style = '';
     } else {
         let question = questions[currentQuestion];
         document.getElementById('question_itle').innerHTML = question['question'];
@@ -103,7 +104,7 @@ function showQuestion() {
 function showAnswer() {
 
     if (currentQuestion >= questions.length) {
-        document.getElementById('end_screen').classList.add('d-none')
+        document.getElementById('end_quiz').classList.add('d-none')
     } else {
         let answer = questions[currentQuestion];
         document.getElementById('answer_1').innerHTML = answer['answer_1'];

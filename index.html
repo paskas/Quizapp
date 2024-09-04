@@ -23,12 +23,21 @@
       <span class="navbar-brand mb-0 h1">Quizapp</span>
     </div>
   </nav>
-  <div class="container" id="end_screen">
-    <div class="card quiz-card shadow-lg border-off">
+  <div class="container">
+
+    <div class="card quiz-card shadow-lg border-off" id="end_screen" style="display: none;">
+      <div>
+        <img class="width-100" src="./img/wow.png" class="card-img-top">
+      </div>
+      <div class="card-title m-2 text-center">
+        <span>Du hast <b>X</b> Fragen von <b>X</b> richtiug beantwortet!</span>
+      </div>
+    </div>
+
+    <div class="card quiz-card shadow-lg border-off" id="question_body">
       <img src="./img/riddler_question-mark.jpg" class="card-img-top">
       <div class="card-body">
         <h5 class="card-title m-2" id="question_itle">Fragen</h5>
-
         <div class="card quiz-answer-card m-2" onclick="answer('answer_1')">
           <div class="card-body" id="answer_1">
             Antwort
