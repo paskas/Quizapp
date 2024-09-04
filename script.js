@@ -129,7 +129,6 @@ function showAnswer() {
     }
 }
 
-
 function updateProgressBar() {
     let percent = (currentQuestion + 1) / questions.length;
     percent = Math.round(percent * 100);
@@ -152,7 +151,7 @@ function answer(selction) {                                                     
     let question = questions[currentQuestion];                                              //  die Variable beinhaltet die aktuelle Frage
     let selctedQuestionNumber = selction.slice(-1)                                          //  die Variable beinhaltet den übergabe Wert z.B. answer_1 wo mit slice(-1) der letzte Buschstabe aus dem String übergeben wird
     let idOfRightAnswer = `answer_${question['right_answer']}`;
-    if (rightAnswerSelected(selctedQuestionNumber)) {                                       //  Vergleich ob die angeklickt Antwort mit der right_answer übereinstimmt
+    if (rightAnswerSelected(selctedQuestionNumber, question)) {                                //  Vergleich ob die angeklickt Antwort mit der right_answer übereinstimmt
         document.getElementById(selction).parentNode.classList.add('bg-success');           //  richtige antwort, setzt den übergeordneten container (parent) auf "grün"
         AUDIO_SUCESS.play();
         rightQuestions++;
@@ -165,7 +164,7 @@ function answer(selction) {                                                     
 }
 
 
-function rightAnswerSelected(selctedQuestionNumber) {
+function rightAnswerSelected(selctedQuestionNumber, question) {
     return selctedQuestionNumber == question['right_answer'];
 }
 
@@ -189,7 +188,6 @@ function resetAnswerButtons() {
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
 }
-
 
 function restartGame() {
     document.getElementById('question_body').classList.remove('d-none')
